@@ -1,0 +1,112 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "User profile with role (customer or painter)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "painter"] },
+        "city": { "type": "string" }
+      },
+      "required": ["id", "name", "phone", "role"]
+    },
+    "booking": {
+      "title": "Booking",
+      "description": "Painting site visit or direct painting booking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bookingNumber": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "painterId": { "type": "string" },
+        "painterName": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "scheduledDate": { "type": "string" },
+        "siteAddress": { "type": "string" },
+        "totalEstimatedAmount": { "type": "number" },
+        "advanceAmountPaid": { "type": "number" },
+        "paymentStatus": { "type": "string" },
+        "bookingStatus": { "type": "string" }
+      },
+      "required": ["bookingNumber", "customerId", "painterId", "scheduledDate"]
+    },
+    "jobLead": {
+      "title": "JobLead",
+      "description": "Customer requirement broadcasted to painters",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "city": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "propertyType": { "type": "string" },
+        "carpetAreaSqFt": { "type": "number" },
+        "budgetEstimate": { "type": "number" },
+        "description": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["customerName", "customerPhone", "serviceType", "carpetAreaSqFt"]
+    },
+    "quote": {
+      "title": "Quote",
+      "description": "Painter bid for a customer job lead",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "jobId": { "type": "string" },
+        "painterId": { "type": "string" },
+        "painterName": { "type": "string" },
+        "ratePerSqFt": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "estimatedDays": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["jobId", "painterId", "totalCost"]
+    },
+    "review": {
+      "title": "Review",
+      "description": "Customer rating and review after job completion",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "painterId": { "type": "string" },
+        "bookingId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["painterId", "customerName", "rating", "comment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Stores user profiles"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "booking",
+      "description": "Stores online customer bookings"
+    },
+    "/jobLeads/{leadId}": {
+      "schema": "jobLead",
+      "description": "Stores posted customer job requirements"
+    },
+    "/quotes/{quoteId}": {
+      "schema": "quote",
+      "description": "Stores painter bids on customer leads"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "review",
+      "description": "Stores customer ratings and reviews for painters"
+    }
+  }
+}

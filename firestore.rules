@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User accounts
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Customer Bookings
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Customer job leads
+    match /jobLeads/{leadId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Painter quotes
+    match /quotes/{quoteId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Customer reviews
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Connection validation collection
+    match /test/{document} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "RangSathi - Painter & Customer Connect",
+  "description": "Smart platform connecting customers with verified professional painters for home painting, wall textures, instant cost estimates, and real-time quotes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
